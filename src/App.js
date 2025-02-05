@@ -1,22 +1,39 @@
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
 function App() {
+
+  const photoUrl = 'https://picsum.photos/v2/list'
+
+  const [photos, setPhotos] = useState([])
+
+  //useEffect per effettuare la chiamata dell'API attraverso fetch
+  useEffect(() => {
+    fetch(photoUrl)
+         .then(res => res.json())
+         .then(photos => {
+          setPhotos(photos.slice(0, 20))
+         })
+  
+    return () => {
+      
+    }
+  }, [])
+  
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>ALBUMS</h1>
+        <ul>
+          {
+            photos.map(photo =>(
+              <li key={photo.id}>
+                <img src={photo.download_url} title={photo.author} />
+              </li>
+            ))
+          }
+        </ul>
       </header>
     </div>
   );
