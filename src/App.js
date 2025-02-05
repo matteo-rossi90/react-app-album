@@ -5,6 +5,7 @@ function App() {
 
   const photoUrl = 'https://picsum.photos/v2/list'
 
+  //inizializzare lo state delle foto
   const [photos, setPhotos] = useState([])
 
   //useEffect per effettuare la chiamata dell'API attraverso fetch
@@ -20,21 +21,23 @@ function App() {
     }
   }, [])
   
-
+  //popolare la componente con le immagini usando il metodo map() e le proprietà dell'array dell'API
   return (
     <div className="App">
       <header className="App-header">
         <h1>ALBUMS</h1>
-        <ul>
+      </header>
+      <main>
+        <ul className="photos">
           {
-            photos.map(photo =>(
+            photos.map(photo => (
               <li key={photo.id}>
-                <img src={photo.download_url} title={photo.author} />
+                <img src={photo.download_url} title={photo.author} alt={photo.id} />
               </li>
             ))
           }
         </ul>
-      </header>
+      </main>
     </div>
   );
 }
