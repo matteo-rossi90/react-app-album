@@ -13,7 +13,7 @@ function App() {
     fetch(photoUrl)
          .then(res => res.json())
          .then(photos => {
-          setPhotos(photos.slice(0, 20))
+          setPhotos(photos.slice(0, 50))
          })
   
     return () => {
